@@ -46,8 +46,20 @@ Estilo responsivo para mobile e desktop.
 Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
 
 1. Faça um fork deste repositório.
+
 2. Crie uma branch com suas alterações:
-` git checkout -b minha-feature `
+    ```bash
+    git checkout -b minha-feature `
 
 3. Faça o commit:
-`git commit -m "Adicionei uma nova feature"`
+    ```bash
+    git commit -m "Adicionei uma nova feature"
+
+4. Envie suas alterações:
+    ```bash
+    git push origin minha-feature
+
+5. Abra um pull request.
+
+## 📄 Licença
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
