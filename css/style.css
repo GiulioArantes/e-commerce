@@ -25,7 +25,7 @@ body {
 
 main {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     justify-items: center;
 }
 
@@ -38,7 +38,7 @@ main {
 .card {
     display: flex;
     flex-direction: column;
-    width: 31vw;
+    width: 24vw;
     margin: 0.3rem;
     background-color: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -107,13 +107,13 @@ p {
 
 .btn-product {
     flex: auto;
-    color: white;
-    background-color: #003459;
+    color: black;
+    background-color: transparent;
     padding: 0.3rem;
-    border: 1px solid #ccc;
+    border: 2px solid black;
     font-weight: bold;
     cursor: pointer;
-    border: none;
+    transition: all 0.3s ease;
 }
 
 .img-cart {
@@ -122,10 +122,38 @@ p {
 
 .div-cart {
     cursor: pointer;
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
 }
 
-button:hover {
-    background-color: #007ea7;
+.div-cart:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+.btn-product:hover {
+    opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+        width: 32vw;
+        margin: 0.1rem;
+    }
+
+    h3,
+    p {
+        padding-left: 0.1rem;
+    }
+
+    .price {
+        font-size: 17px;
+    }
 }
 
 @media screen and (max-width: 480px) {
