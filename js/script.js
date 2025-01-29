@@ -27,6 +27,7 @@ function renderProduct(products) {
 
         //Título
         const h3 = document.createElement("h3");
+        h3.setAttribute("title", product.title);
         h3.textContent = product.title;
 
         //Categoria
@@ -36,6 +37,7 @@ function renderProduct(products) {
 
         //Preço
         const pPrice = document.createElement("p");
+        pPrice.classList.add("price");
         pPrice.textContent = `R$ ${product.price}`;
 
         // Avaliação
@@ -59,10 +61,14 @@ function renderProduct(products) {
             openModal(product.description);
         })
 
-        const btnCart = document.createElement("button");
-        btnCart.classList.add("btn-cart");
-        btnCart.textContent = "Adicionar ao carrinho";
-        btnCart.addEventListener("click", () => {
+        const divCart = document.createElement("div");
+        divCart.classList.add("div-cart");
+        const imgCart = document.createElement("img");
+        imgCart.classList.add("img-cart");
+        imgCart.src = "assets/favicon.ico"
+        imgCart.alt = "Adicionar ao carrinho"
+        divCart.appendChild(imgCart);
+        divCart.addEventListener("click", () => {
             const productInfo = {
                 title: product.title,
                 price: product.price
@@ -70,11 +76,16 @@ function renderProduct(products) {
             storeInfo(productInfo);
         });
 
+        // Container para os botões 
+        const cardBtns = document.createElement("div");
+        cardBtns.classList.add("card-btns");
+        cardBtns.append(divCart, openModalBtn)
+
         const card = document.createElement("article");
         card.classList.add("card");
 
         //Agrupamento
-        card.append(figure, h3, pCategory, pPrice, btnCart, openModalBtn);
+        card.append(figure, h3, pCategory, pPrice, cardBtns);
         // card.appendChild(pDescription);
         displayProducts.appendChild(card);
     });
