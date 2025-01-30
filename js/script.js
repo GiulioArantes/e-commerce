@@ -5,6 +5,9 @@ const modalDescription = document.querySelector("#modal-description");
 const closeModalBtn = document.querySelector("#close-modal-btn");
 const searchDiv = document.querySelector("#search-div");
 const search = document.querySelector("#search");
+const searchBtn = document.querySelector(".search-button");
+const cartDiv = document.querySelector("#cart-div");
+const modalCart = document.querySelector("#cart-modal");
 
 async function fetchProducts() {
     try {
@@ -73,7 +76,7 @@ function renderProduct(products) {
         divCart.addEventListener("click", () => {
             const productInfo = {
                 title: product.title,
-                price: product.price
+                price: product.price,
             };
             storeInfo(productInfo);
         });
@@ -91,42 +94,64 @@ function renderProduct(products) {
         card.append(figure, h3, pCategory, pPrice, cardBtns);
         // card.appendChild(pDescription);
         displayProducts.appendChild(card);
-        search.addEventListener("keydown", searchProduct);
+        searchBtn.addEventListener("click", searchProduct);
+        search.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                searchProduct();
+            }
+        });
+
     });
 }
 // Descrição
 
-const searchProduct = (event) => {
-    if (event.key === "Enter") {
-        const filterCard = document.querySelectorAll("article");
-        let found = false;
-        filterCard.forEach(card => {
-            const title = card.querySelector("h3").textContent;
-            const category = card.querySelector(".category").textContent;
-            if (search.value === title) {
-                card.classList.remove("hidden");
-                found = true;
-
-            } else if (search.value === category) {
-                card.classList.remove("hidden");
-                found = true;
-            }
-            else {
-                card.classList.add("hidden")
-            }
-        });
-        if (!found) {
-            filterCard.forEach(card => card.classList.remove("hidden"));
+const searchProduct = () => {
+    const filterCard = document.querySelectorAll("article");
+    let found = false;
+    filterCard.forEach(card => {
+        const title = card.querySelector("h3").textContent;
+        const category = card.querySelector(".category").textContent;
+        if (search.value === title || search.value === category) {
+            card.classList.remove("hidden");
+            found = true;
+        } else {
+            card.classList.add("hidden")
         }
+    });
+    if (!found) {
+        search.value = "";
+        filterCard.forEach(card => card.classList.remove("hidden"));
+
     }
-}
+};
 
 function storeInfo(product) {
     let savedProduct = JSON.parse(localStorage.getItem('savedProducts')) || [];
-    savedProduct.push(product);
+    if (savedProduct[product.title]) {
+        savedProduct[product.title].quantity += 1;
+    }
+    savedProduct[product.title] = {
+        quantity: 1,
+        price: product.price
+    }
     localStorage.setItem("savedProducts", JSON.stringify(savedProduct));
     console.log("produto salvo:", product);
-    alert(`Você quer comprar s item: ${product.title} - R$ ${product.price}`);
+    alert(`Você quer comprar o item: ${product.title} - R$ ${product.price}`);
+}
+
+function showCart(product) {
+    let cart = JSON.parse(localStorage.getItem("savedProducts")) || {};
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    for (let item in cart) {
+        totalItems += cart[item].quantity;
+        totalPrice += cart[item].quantity * cart[item].price
+    }
+}
+
+function openCart() {
+    modalCart.style.display = "flex";
 }
 
 function openModal(description) {

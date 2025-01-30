@@ -14,9 +14,13 @@
     <header>
         <h1 id="main-title">Comércio Eletrônico</h1>
         <div class="header-container">
-            <input type="text" id="search" name="search" placeholder="Produto ou Categoria">
+            <div class="div-search">
+                <button class="search-button"><img src="assets/search.svg" class="search-img"
+                        alt="Botão de pesquisa"></button>
+                <input type="text" id="search" name="search" placeholder="Produto ou Categoria">
+            </div>
             <div id="cart-div">
-                <img id="header-cart" class="img-cart" src="assets/white-cart.svg" alt="Carrinho de compras">
+                <img id="header-cart" class="img-cart div-cart" src="assets/white-cart.svg" alt="Carrinho de compras">
             </div>
         </div>
     </header>
@@ -27,7 +31,9 @@
             <span id="close-modal-btn" class="close-btn">&times;</span>
             <p id="modal-description"></p>
         </div>
-        <div class="cart-section">
+    </div>
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-content">
             <span id="close-cart-btn" class="close-cart-btn">&times;</span>
         </div>
     </div>
