@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -12,8 +12,13 @@
 
 <body>
     <header>
-        <h1>Comércio Eletrônico</h1>
-        <input type="text" id="search" name="search" placeholder="Produto ou Categoria">
+        <h1 id="main-title">Comércio Eletrônico</h1>
+        <div class="header-container">
+            <input type="text" id="search" name="search" placeholder="Produto ou Categoria">
+            <div id="cart-div">
+                <img id="header-cart" class="img-cart" src="assets/white-cart.svg" alt="Carrinho de compras">
+            </div>
+        </div>
     </header>
     <main id="display-products">
     </main>
@@ -21,6 +26,9 @@
         <div class="modal-content">
             <span id="close-modal-btn" class="close-btn">&times;</span>
             <p id="modal-description"></p>
+        </div>
+        <div class="cart-section">
+            <span id="close-cart-btn" class="close-cart-btn">&times;</span>
         </div>
     </div>
     <footer>Direitos reservados &#x20AC;</footer>

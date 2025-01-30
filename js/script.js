@@ -67,7 +67,7 @@ function renderProduct(products) {
         divCart.classList.add("div-cart");
         const imgCart = document.createElement("img");
         imgCart.classList.add("img-cart");
-        imgCart.src = "assets/favicon.ico"
+        imgCart.src = "assets/cart.svg"
         imgCart.alt = "Adicionar ao carrinho"
         divCart.appendChild(imgCart);
         divCart.addEventListener("click", () => {

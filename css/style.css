@@ -3,6 +3,25 @@ header {
     justify-content: space-between;
 }
 
+.header-container {
+    display: flex;
+    gap: 1rem;
+}
+
+#cart-div {
+    align-self: flex-end;
+    margin-right: 0.3rem;
+}
+
+#header-cart {
+    fill: white;
+    width: 2.5rem;
+}
+
+h1 {
+    align-self: flex-start;
+}
+
 footer {
     padding-top: 2rem;
 }
@@ -150,11 +169,12 @@ p {
 }
 
 #search {
+    border: none;
     opacity: 0.7;
     border-radius: 5rem;
     height: 5vh;
     align-self: flex-end;
-    margin: 0 1rem 1rem 0;
+    margin-bottom: 0.3rem;
 }
 
 @media screen and (max-width: 768px) {
