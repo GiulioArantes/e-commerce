@@ -10,12 +10,25 @@ const cartDiv = document.querySelector("#cart-div");
 const modalCart = document.querySelector("#cart-modal");
 
 async function fetchProducts() {
+    const loading = document.getElementById("loading");
+    const errorMessage = document.getElementById("error-message");
+
+    loading.style.display = "block";
+    errorMessage.style.display = "none";
+
     try {
         const response = await fetch("https://fakestoreapi.com/products");
+        if (!response.ok) {
+            throw new Error(`Erro ao carregar os produtos. Status: ${response.status}`);
+        }
+
         products = await response.json();
         renderProduct(products);
     } catch (error) {
-        console.error(`Ocorreu um erro ${error}`);
+        errorMessage.textContent = `Ocorreu um erro ${error.message}`;
+        errorMessage.style.display = "block";
+    } finally {
+        loading.style.display = "none";
     }
 }
 
@@ -94,36 +107,40 @@ function renderProduct(products) {
         card.append(figure, h3, pCategory, pPrice, cardBtns);
         // card.appendChild(pDescription);
         displayProducts.appendChild(card);
-        searchBtn.addEventListener("click", searchProduct);
-        search.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                searchProduct();
-            }
-        });
-
     });
 }
 // Descrição
 
 const searchProduct = () => {
-    const filterCard = document.querySelectorAll("article");
+    const searchTerm = search.value.toLowerCase();
+    const cards = document.querySelectorAll(".card");
+
     let found = false;
-    filterCard.forEach(card => {
-        const title = card.querySelector("h3").textContent;
-        const category = card.querySelector(".category").textContent;
-        if (search.value === title || search.value === category) {
+
+    cards.forEach(card => {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        const category = card.querySelector(".category").textContent.toLowerCase();
+
+        if (title.includes(searchTerm) || category.includes(searchTerm)) {
             card.classList.remove("hidden");
             found = true;
         } else {
-            card.classList.add("hidden")
+            card.classList.add("hidden");
         }
-    });
-    if (!found) {
-        search.value = "";
-        filterCard.forEach(card => card.classList.remove("hidden"));
+    })
 
+    if (!found) {
+        cards.forEach(card => card.classList.remove("hidden"));
+        alert(`Produto não encontrado. Tente novamente`)
     }
 };
+
+searchBtn.addEventListener("click", searchProduct);
+search.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        searchProduct();
+    }
+});
 
 function storeInfo(product) {
     let savedProduct = JSON.parse(localStorage.getItem('savedProducts')) || [];
