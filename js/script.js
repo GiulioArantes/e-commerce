@@ -9,12 +9,16 @@ const searchBtn = document.querySelector(".search-button");
 const cartDiv = document.querySelector("#cart-div");
 const modalCart = document.querySelector("#cart-modal");
 
+const toggleElement = (element, displayStyle) => {
+    element.style.display = displayStyle;
+}
+
 async function fetchProducts() {
     const loading = document.getElementById("loading");
     const errorMessage = document.getElementById("error-message");
 
-    loading.style.display = "block";
-    errorMessage.style.display = "none";
+    toggleElement(loading, "block");
+    toggleElement(errorMessage, "none");
 
     try {
         const response = await fetch("https://fakestoreapi.com/products");
@@ -26,16 +30,26 @@ async function fetchProducts() {
         renderProduct(products);
     } catch (error) {
         errorMessage.textContent = `Ocorreu um erro ${error.message}`;
-        errorMessage.style.display = "block";
+        toggleElement(errorMessage, "block");
     } finally {
-        loading.style.display = "none";
+        toggleElement(loading, "none");
     }
+}
+
+const createElement = (tag, className, content, attributes = {}) => {
+    const element = document.createElement(tag);
+    if (className) element.classList.add(className);
+    if (content) element.textContent = content;
+    for (const [key, value] of Object.entries(attributes)) {
+        element.setAttribute(key, value);
+    }
+    return element;
 }
 
 function renderProduct(products) {
     displayProducts.innerHTML = "";
     products.forEach(product => {
-        //Imagem 
+        //Imagem
         const img = document.createElement("img");
         img.classList.add("product-img");
         img.setAttribute("src", product.image);
@@ -57,18 +71,6 @@ function renderProduct(products) {
         const pPrice = document.createElement("p");
         pPrice.classList.add("price");
         pPrice.textContent = `R$ ${product.price}`;
-
-        // Avaliação
-        // for(let i = 1; 1 <= 5; i++) {
-        //     const star = document.createElement("span");
-        //     if (i <= product.rating.rate) {
-        //         star.classList.add("star");
-        //         star.textContent = "★";
-        //     } else {
-        //         star.classList.add("star", "empty");
-        //         star.textContent = "☆"
-        //     }
-        // };
 
         //Botões detalhe - carrinho
         const openModalBtn = document.createElement("button");
@@ -156,15 +158,11 @@ function storeInfo(product) {
     alert(`Você quer comprar o item: ${product.title} - R$ ${product.price}`);
 }
 
+let cart = [];
 function showCart(product) {
-    let cart = JSON.parse(localStorage.getItem("savedProducts")) || {};
-    let totalItems = 0;
-    let totalPrice = 0;
-
-    for (let item in cart) {
-        totalItems += cart[item].quantity;
-        totalPrice += cart[item].quantity * cart[item].price
-    }
+    cart.push(product);
+    localStorage.setItem("cart", JSONN.stringify(cart));
+    alert(`${product.title} adicionado ao carrinho!`);
 }
 
 function openCart() {
