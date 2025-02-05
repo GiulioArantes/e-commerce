@@ -1,46 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Visite o novo comércio eletrônico e encontre o produto que está procurando!">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <meta
+      name="description"
+      content="Visite o novo comércio eletrônico e encontre o produto que está procurando!"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Comércio eletrônico</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1 id="main-title">Comércio Eletrônico</h1>
-        <div class="header-container">
-            <div class="div-search">
-                <button class="search-button"><img src="assets/search.svg" class="search-img"
-                        alt="Botão de pesquisa"></button>
-                <input type="text" id="search" name="search" placeholder="Produto ou Categoria">
-            </div>
-            <div id="cart-div">
-                <img id="header-cart" class="img-cart div-cart" src="assets/white-cart.svg" alt="Carrinho de compras">
-            </div>
+      <h1 id="main-title">Comércio Eletrônico</h1>
+      <div class="header-container">
+        <div class="div-search">
+          <button class="search-button">
+            <img
+              src="assets/search.svg"
+              class="search-img"
+              alt="Botão de pesquisa"
+            />
+          </button>
+          <input
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Produto ou Categoria"
+          />
         </div>
+        <div id="cart-div">
+          <img
+            id="header-cart"
+            class="img-cart div-cart"
+            src="assets/white-cart.svg"
+            alt="Carrinho de compras"
+          />
+        </div>
+      </div>
     </header>
     <main id="display-products">
-        <div id="loading" style="display: none;">Carregando...</div>
-        <div id="error-message" style="display: none;"></div>
+      <div id="loading" style="display: none">Carregando...</div>
+      <div id="error-message" style="display: none"></div>
     </main>
     <div id="modal" class="modal">
-        <div class="modal-content">
-            <span id="close-modal-btn" class="close-btn">&times;</span>
-            <p id="modal-description"></p>
-        </div>
+      <div class="modal-content">
+        <span id="close-modal-btn" class="close-btn">&times;</span>
+        <p id="modal-description"></p>
+      </div>
     </div>
     <div id="cart-modal" class="cart-modal">
-        <div class="cart-content">
-            <span id="close-cart-btn" class="close-cart-btn">&times;</span>
-        </div>
+      <div class="cart-content">
+        <span id="close-cart-btn" class="close-cart-btn">&times;</span>
+      </div>
     </div>
     <footer>Direitos reservados &#x20AC;</footer>
     <script src="js/script.js"></script>
-</body>
-
+  </body>
 </html>
