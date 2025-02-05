@@ -50,45 +50,31 @@ const createElement = (tag, className, content, attributes = {}) => {
 
 function renderProduct(products) {
   displayProducts.innerHTML = '';
+
   products.forEach((product) => {
-    //Imagem
-    const img = document.createElement('img');
-    img.classList.add('product-img');
-    img.setAttribute('src', product.image);
-    img.setAttribute('alt', product.title);
+    const img = createElement('img', 'product-img', '', {
+      src: product.image,
+      alt: product.title,
+    });
     const figure = document.createElement('figure');
-    figure.appendChild(img);
-
-    //Título
-    const h3 = document.createElement('h3');
-    h3.setAttribute('title', product.title);
-    h3.textContent = product.title;
-
-    //Categoria
-    const pCategory = document.createElement('p');
-    pCategory.classList.add('category');
-    pCategory.textContent = product.category;
-
-    //Preço
-    const pPrice = document.createElement('p');
-    pPrice.classList.add('price');
-    pPrice.textContent = `R$ ${product.price}`;
-
-    //Botões detalhe - carrinho
-    const openModalBtn = document.createElement('button');
-    openModalBtn.classList.add('btn-product');
-    openModalBtn.textContent = 'Detalhes';
+    figure.appendChild(img); // Imagens
+    const h3 = createElement('h3', '', product.title, {
+      title: product.title,
+    }); // Títulos
+    const pCategory = createElement('p', 'category', product.category); //Categorias
+    const pPrice = createElement('p', 'price', `R$ ${product.price}`, ''); //Preços
+    const openModalBtn = createElement('button', 'btn-product', 'Detalhes', ''); //Detalhes
 
     openModalBtn.addEventListener('click', () => {
       openModal(product.description);
     });
 
-    const divCart = document.createElement('div');
-    divCart.classList.add('div-cart');
-    const imgCart = document.createElement('img');
-    imgCart.classList.add('img-cart');
-    imgCart.src = 'assets/cart.svg';
-    imgCart.alt = 'Adicionar ao carrinho';
+    const divCart = createElement('div', 'div-cart', '', '');
+    const imgCart = createElement('img', 'img-cart', '', {
+      src: 'assets/cart.svg',
+      alt: 'Adicionar ao carrinho',
+    }); //Carrinho
+
     divCart.appendChild(imgCart);
     divCart.addEventListener('click', () => {
       const productInfo = {
@@ -98,22 +84,15 @@ function renderProduct(products) {
       storeInfo(productInfo);
     });
 
-    // Container para os botões
-    const cardBtns = document.createElement('div');
-    cardBtns.classList.add('card-btns');
-    cardBtns.append(divCart, openModalBtn);
+    const cardBtns = createElement('div', 'card-btns', '', '');
+    cardBtns.append(divCart, openModalBtn); // Agrupamento de elementos para estilização
 
-    const card = document.createElement('article');
-    card.id = product.id;
-    card.classList.add('card');
+    const card = createElement('article', 'card', '', { id: product.id });
 
-    //Agrupamento
     card.append(figure, h3, pCategory, pPrice, cardBtns);
-    // card.appendChild(pDescription);
-    displayProducts.appendChild(card);
+    displayProducts.appendChild(card); // Agrupamento de todos os elementos
   });
 }
-// Descrição
 
 const searchProduct = () => {
   const searchTerm = search.value.toLowerCase();
