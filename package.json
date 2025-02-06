@@ -1,0 +1,14 @@
+{
+  "name": "meu-projeto-didatico",
+  "version": "1.0.0",
+  "description": "Um projeto de aprendizado em desenvolvimento front-end",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,html,css}\""
+  },
+  "author": "Giulio Arantes",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}

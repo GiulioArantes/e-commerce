@@ -1,0 +1,17 @@
+# Arquivos gerados
+build/
+dist/
+
+# Dependências
+node_modules/
+
+# Arquivos de configuração
+package-lock.json
+yarn.lock
+
+# Arquivos de ambiente
+.env*
+
+# Outros arquivos que não precisam ser formatados
+*.min.js
+*.min.css
