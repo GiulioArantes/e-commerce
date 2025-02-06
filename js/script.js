@@ -3,6 +3,7 @@ const displayProducts = document.getElementById('display-products');
 const modal = document.querySelector('#modal');
 const modalDescription = document.querySelector('#modal-description');
 const closeModalBtn = document.querySelector('#close-modal-btn');
+const closeCartBtn = document.querySelector('#close-cart-btn');
 const searchDiv = document.querySelector('#search-div');
 const search = document.querySelector('#search');
 const searchBtn = document.querySelector('.search-button');
@@ -148,7 +149,11 @@ function showCart(product) {
 
 function openCart() {
   modalCart.style.display = 'flex';
+  document.querySelector('.cart-content');
 }
+
+cartDiv.addEventListener('click', openCart);
+closeCartBtn.addEventListener('click', closeCart);
 
 function openModal(description) {
   modalDescription.textContent = description;
@@ -159,9 +164,14 @@ closeModalBtn.addEventListener('click', () => {
   modal.style.display = 'none';
 });
 
+function closeCart() {
+  modalCart.style.display = 'none';
+}
+
 window.addEventListener('click', (event) => {
-  if (event.target === modal) {
+  if (event.target === modal || event.target === modalCart) {
     modal.style.display = 'none';
+    modalCart.style.display = 'none';
   }
 });
 
