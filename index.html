@@ -15,9 +15,10 @@
     <title>Comércio eletrônico</title>
   </head>
 
-  <body>
+  <body id="body">
     <header>
       <h1 id="main-title">Comércio Eletrônico</h1>
+      <!-- starts: shopping cart and search input -->
       <div class="header-container">
         <div class="div-search">
           <button class="search-button">
@@ -37,30 +38,43 @@
         <div id="cart-div">
           <img
             id="header-cart"
-            class="img-cart div-cart"
+            class="div-cart"
             src="assets/white-cart.svg"
             alt="Carrinho de compras"
           />
         </div>
       </div>
+      <!-- ends: shopping cart and search input -->
     </header>
     <main id="display-products">
+      <!-- starts: related to loading and errors -->
       <div id="loading" style="display: none">Carregando...</div>
       <div id="error-message" style="display: none"></div>
+      <!-- ends: related to loading and errors -->
     </main>
-    <div id="modal" class="modal">
+    <!-- starts: Product Description model -->
+    <div id="modal" class="modal" data-modal-type="product">
       <div class="modal-content">
         <span id="close-modal-btn" class="close-btn">&times;</span>
         <p id="modal-description"></p>
       </div>
     </div>
-    <div id="cart-modal" class="cart-modal">
+    <!-- ends: Product Description model -->
+    <!-- starts: Shopping Cart Management model -->
+    <div id="cart-modal" class="modal" data-modal-type="cart">
       <div class="cart-content">
         <span id="close-cart-btn" class="close-cart-btn">&times;</span>
       </div>
     </div>
+    <!-- ends: Shopping Cart Management model -->
+    <!-- starts: product purchase model -->
+    <div id="buy-modal" class="modal" data-modal-type="buy">
+      <div class="buy-content">
+        <span id="close-buy-btn" class="close-buy-btn">&times;</span>
+      </div>
+    </div>
+    <!-- ends: product purchase model -->
     <footer>Direitos reservados &#x20AC;</footer>
     <script type="module" src="js/script.js"></script>
-    <script src="js/cart.js"></script>
   </body>
 </html>
