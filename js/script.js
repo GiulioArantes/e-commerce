@@ -1,20 +1,13 @@
-let products = [];
+// Basic variables/ constants
+export let products = [];
 const displayProducts = document.getElementById('display-products');
-const modal = document.querySelector('#modal');
-const modalDescription = document.querySelector('#modal-description');
-const closeModalBtn = document.querySelector('#close-modal-btn');
-const closeCartBtn = document.querySelector('#close-cart-btn');
-const searchDiv = document.querySelector('#search-div');
-const search = document.querySelector('#search');
-const searchBtn = document.querySelector('.search-button');
-const cartDiv = document.querySelector('#cart-div');
-const modalCart = document.querySelector('#cart-modal');
-const cartDisplay = document.querySelector('.cart-content');
+const body = document.querySelector('#body');
 
 const toggleElement = (element, displayStyle) => {
   element.style.display = displayStyle;
 };
 
+// Function: API call
 async function fetchProducts() {
   const loading = document.getElementById('loading');
   const errorMessage = document.getElementById('error-message');
@@ -39,7 +32,8 @@ async function fetchProducts() {
   }
 }
 
-const createElement = (tag, className, content, attributes = {}) => {
+// Function: Simplified element creation
+export const createElement = (tag, className, content, attributes = {}) => {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
   if (content) element.textContent = content;
@@ -49,24 +43,34 @@ const createElement = (tag, className, content, attributes = {}) => {
   return element;
 };
 
+// function: basic product information gathered
+export function createProductElements(product) {
+  const img = createElement('img', 'product-img', '', {
+    src: product.image,
+    alt: product.title,
+  });
+  const figure = document.createElement('figure');
+  figure.appendChild(img); // images
+  const h3 = createElement('h3', '', product.title, {
+    title: product.title,
+  }); // titles
+  const pCategory = createElement('p', 'category', product.category); //categories
+  const pPrice = createElement('p', 'price', `R$ ${product.price}`, ''); //prices
+  return {
+    figure,
+    h3,
+    pCategory,
+    pPrice,
+    img,
+  };
+}
+
+// Function: main product arrangement
 function renderProduct(products) {
   displayProducts.innerHTML = '';
 
   products.forEach((product) => {
-    const img = createElement('img', 'product-img', '', {
-      src: product.image,
-      alt: product.title,
-    });
-    const figure = document.createElement('figure');
-    figure.appendChild(img); // Imagens
-
-    const h3 = createElement('h3', '', product.title, {
-      title: product.title,
-    }); // Títulos
-
-    const pCategory = createElement('p', 'category', product.category); //Categorias
-
-    const pPrice = createElement('p', 'price', `R$ ${product.price}`, ''); //Preços
+    const elements = createProductElements(product);
 
     const openModalBtn = createElement('button', 'btn-product', 'Detalhes', ''); //Detalhes
 
@@ -81,26 +85,46 @@ function renderProduct(products) {
     cardBtns.append(divCart, openModalBtn); // Agrupamento de elementos para estilização
 
     const card = createElement('article', 'card', '', { id: product.id });
-    card.append(figure, h3, pCategory, pPrice, cardBtns);
+    card.append(
+      elements.figure,
+      elements.h3,
+      elements.pCategory,
+      elements.pPrice,
+      cardBtns
+    );
     displayProducts.appendChild(card); // Agrupamento de todos os elementos
   });
 }
+//Functions: cart related
+import { addToCart, loadCart, cartAction, totalPrice } from './cart.js';
 
 fetchProducts().then(() => {
   renderProduct(products);
+  loadCart();
 });
 
+//Event: Add to Cart
 displayProducts.addEventListener('click', (event) => {
-  const target = event.target.closest('button');
-  if (target && target.classList.contains('btn-product')) {
+  const target = event.target.closest('img.img-cart');
+  if (target) {
     const productId = target.closest('.card').id;
     const product = products.find((p) => p.id == productId);
-    if (product) {
-      openModal(product.description);
-    }
+    addToCart(product);
   }
 });
 
+//Event: Increase or decrease the volume of products
+const cartDisplay = document.querySelector('.cart-content');
+cartDisplay.addEventListener('click', (event) => {
+  if (
+    event.target.classList.contains('less-btn') ||
+    event.target.classList.contains('more-btn')
+  )
+    cartAction(event);
+});
+
+//Funtion: Search by product or category
+const search = document.querySelector('#search');
 const searchProduct = () => {
   const searchTerm = search.value.toLowerCase();
   const filtered = products.filter(
@@ -115,6 +139,9 @@ const searchProduct = () => {
     renderProduct(products);
   }
 };
+
+// Event: Search by product or category
+const searchBtn = document.querySelector('.search-button');
 searchBtn.addEventListener('click', searchProduct);
 search.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
@@ -122,95 +149,55 @@ search.addEventListener('keydown', (event) => {
   }
 });
 
-function addToCart(product) {
-  let cart = JSON.parse(localStorage.getItem('carts')) || {};
-  if (cart[product.title]) {
-    cart[product.title].quantity += 1;
-  } else {
-    cart[product.title] = {
-      quantity: 1,
-      price: product.price,
-    };
+// close or open models
+const modals = document.querySelectorAll('.modal');
+let activeModal = null;
+const modalActions = {
+  open: (modalType) => {
+    const modal = [...modals].find((m) => m.dataset.modalType === modalType);
+    if (modal) {
+      activeModal = modal;
+      modal.style.display = 'flex';
+    }
+  },
+
+  close: () => {
+    if (activeModal) {
+      activeModal.style.display = 'none';
+      activeModal = null;
+    }
+  },
+};
+
+// Event: close modal
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('close-modal-btn')) {
+    modalActions.close();
   }
-  localStorage.setItem('carts', JSON.stringify(cart));
-  alert(`Você quer comprar o item: ${product.title} - R$ ${product.price}`);
-  const h3 = createElement('h3', '', product.title, {
-    title: product.title,
-  }); // Títulos
-  const price = createElement(
-    'p',
-    'price',
-    `R$ ${cart[product.title].quantity * cart[product.title].price}`,
-    ''
-  ); //Preços
-  const quantity = createElement(
-    'p',
-    'quantity',
-    `${cart[product.title].quantity}`,
-    ''
-  ); //Preços
 
-  cartDisplay.append(h3, price, quantity);
+  if (e.target.classList.contains('modal')) {
+    modalActions.close();
+  }
+});
+
+// Funtion: Open description
+const modalDescription = document.querySelector('#modal-description');
+function openProductModal(product) {
+  modalDescription.textContent = product.description;
+  modalActions.open('product');
 }
 
-function loadCart() {
-  const cart = JSON.parse(localStorage.getItem('carts')) || {};
-  Object.keys(cart).forEach((title) => {
-    const item = cart[title];
-    cartDisplay.append(
-      createElement('h3', '', title),
-      createElement('p', 'price', `Preço: R$ ${item.price}`),
-      createElement('p', 'quantity', `Quantidade: ${item.quantity}`)
-    );
-    cartDisplay.appendChild(div);
-  });
-}
-window.addEventListener('load', loadCart);
+// Event: Open modal
+body.addEventListener('click', (event) => {
+  const target = event.target;
 
-displayProducts.addEventListener('click', (event) => {
-  const target = event.target.closest('img.img-cart');
-  if (target) {
+  if (target.closest('.btn-product')) {
     const productId = target.closest('.card').id;
     const product = products.find((p) => p.id == productId);
-    addToCart(product);
+    openProductModal(product);
   }
-});
 
-function removeFromCart(productId) {
-  addToCart();
-}
-
-let cart = [];
-function showCart() {
-  localStorage.setItem('cart', JSONN.stringify(cart));
-
-  alert(`${product.title} adicionado ao carrinho!`);
-}
-
-function openCart() {
-  toggleElement(modalCart, 'flex');
-  cartDisplay;
-}
-
-cartDiv.addEventListener('click', openCart);
-closeCartBtn.addEventListener('click', closeCart);
-
-function openModal(description) {
-  modalDescription.textContent = description;
-  toggleElement(modal, 'flex');
-}
-
-closeModalBtn.addEventListener('click', () => {
-  toggleElement(modal, 'none');
-});
-
-function closeCart() {
-  toggleElement(modalCart, 'none');
-}
-
-window.addEventListener('click', (event) => {
-  if (event.target === modal || event.target === modalCart) {
-    toggleElement(modal, 'none');
-    toggleElement(modalCart, 'none');
+  if (target.closest('#header-cart')) {
+    modalActions.open('cart');
   }
 });
