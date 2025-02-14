@@ -55,7 +55,12 @@ export function createProductElements(product) {
     title: product.title,
   }); // titles
   const pCategory = createElement('p', 'category', product.category); //categories
-  const pPrice = createElement('p', 'price', `R$ ${product.price}`, ''); //prices
+  const pPrice = createElement(
+    'p',
+    'price',
+    `De: R$ ${product.originalPrice} | Por: R$ ${product.price}`,
+    ''
+  ); //prices
   return {
     figure,
     h3,
@@ -98,7 +103,8 @@ function renderProduct(products) {
 //Functions: cart related
 import { addToCart, loadCart, cartAction, totalPrice } from './cart.js';
 
-fetchProducts().then(() => {
+fetchProducts().then(async () => {
+  products = await Promise.resolve(products).then(applyDiscount);
   renderProduct(products);
   loadCart();
 });
@@ -108,7 +114,7 @@ displayProducts.addEventListener('click', (event) => {
   const target = event.target.closest('img.img-cart');
   if (target) {
     const productId = target.closest('.card').id;
-    const product = products.find((p) => p.id == productId);
+    const product = products.find((p) => p.id === productId);
     addToCart(product);
   }
 });
@@ -123,6 +129,47 @@ cartDisplay.addEventListener('click', (event) => {
     cartAction(event);
 });
 
+//Fuction: apply discount
+export function applyDiscount(products) {
+  return products.map((product) => {
+    const originalPrice = Number(product.price);
+    return {
+      ...product,
+      price: (originalPrice * 0.9).toFixed(2),
+      originalPrice,
+    };
+  });
+}
+
+//Function: show sidebar options
+const sidebarPrice = document.querySelector('#sidebar-price-btn');
+const inputHundred = document.querySelector('#hundred');
+const hundredLabel = document.querySelector('#hundred-label');
+
+sidebarPrice.addEventListener('click', () => {
+  if (inputHundred.classList.contains('hidden')) {
+    inputHundred.classList.remove('hidden');
+    hundredLabel.classList.remove('hidden');
+  } else {
+    inputHundred.classList.add('hidden');
+    hundredLabel.classList.add('hidden');
+  }
+});
+
+//Function: show products above $100
+function showHundredProducts(products) {
+  return products.filter((product) => product.price >= 100);
+}
+
+inputHundred.addEventListener('change', () => {
+  if (inputHundred.checked) {
+    const filtered = showHundredProducts(products);
+    renderProduct(filtered);
+  } else {
+    renderProduct(products);
+  }
+});
+
 //Funtion: Search by product or category
 const search = document.querySelector('#search');
 const searchProduct = () => {
@@ -135,7 +182,7 @@ const searchProduct = () => {
   if (filtered.length > 0) {
     renderProduct(filtered);
   } else {
-    alert(`Produto não encontrado. Tente novamente`);
+    alert('Produto não encontrado. Tente novamente');
     renderProduct(products);
   }
 };
@@ -171,7 +218,7 @@ const modalActions = {
 
 // Event: close modal
 document.addEventListener('click', (e) => {
-  if (e.target.classList.contains('close-modal-btn')) {
+  if (e.target.classList.contains('close-btn')) {
     modalActions.close();
   }
 
@@ -193,7 +240,7 @@ body.addEventListener('click', (event) => {
 
   if (target.closest('.btn-product')) {
     const productId = target.closest('.card').id;
-    const product = products.find((p) => p.id == productId);
+    const product = products.find((p) => p.id === productId);
     openProductModal(product);
   }
 
