@@ -1,7 +1,11 @@
 // Basics
-import { products, createElement, createProductElements } from './script.js';
+import {
+  products,
+  createElement,
+  createProductElements,
+  applyDiscount,
+} from './script.js';
 const cartDisplay = document.querySelector('.cart-content');
-
 //function: load cart model
 export function loadCart() {
   const cart = JSON.parse(localStorage.getItem('carts')) || {};
@@ -30,12 +34,13 @@ export function loadCart() {
 export function totalPrice() {
   const cart = JSON.parse(localStorage.getItem('carts')) || {};
 
-  let total = 0;
-  let quantityLet = 0;
-  Object.values(cart).forEach((item) => {
-    total += item.price * item.quantity;
-    quantityLet += item.quantity;
-  });
+  const total = Object.values(cart).reduce((acc, value) => {
+    const totalValue = value.price * value.quantity;
+    return (acc += totalValue);
+  }, 0);
+  const quantityLet = Object.values(cart).reduce((acc, qtd) => {
+    return (acc += qtd.quantity);
+  }, 0);
 
   const resume = createElement('h3', 'resume', 'Resumo');
   const span = createElement(
@@ -57,14 +62,14 @@ export function totalPrice() {
 
 //function: add new products to cart
 export function addToCart(product) {
-  let cart = JSON.parse(localStorage.getItem('carts')) || {};
+  const cart = JSON.parse(localStorage.getItem('carts')) || {};
   cart[product.title] = {
     quantity: cart[product.title] ? cart[product.title].quantity + 1 : 1,
     price: product.price,
   };
   localStorage.setItem('carts', JSON.stringify(cart));
   loadCart();
-  alert(`Produto adicionado ao carrinho!`);
+  alert('Produto adicionado ao carrinho!');
 }
 
 //function: possible actions in the cart

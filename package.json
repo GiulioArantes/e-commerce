@@ -4,11 +4,27 @@
   "description": "Um projeto de aprendizado em desenvolvimento front-end",
   "main": "index.js",
   "scripts": {
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,html,css}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,html,css}\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "author": "Giulio Arantes",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^2.8.8"
-  }
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^15.15.0",
+    "prettier": "^3.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GiulioArantes/e-commerce.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/GiulioArantes/e-commerce/issues"
+  },
+  "homepage": "https://github.com/GiulioArantes/e-commerce#readme"
 }
