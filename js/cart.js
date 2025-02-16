@@ -1,22 +1,25 @@
 // Basics
-import {
-  products,
-  createElement,
-  createProductElements,
-  applyDiscount,
-} from './script.js';
+import { getProducts } from './api.js';
+import { createElement } from './dom-helpers.js';
+import { createProductElements } from './product-service.js';
+
 const cartDisplay = document.querySelector('.cart-content');
 //function: load cart model
 export function loadCart() {
   const cart = JSON.parse(localStorage.getItem('carts')) || {};
   cartDisplay.innerHTML = '';
-  Object.keys(cart).forEach((title) => {
-    const item = cart[title];
-    const product = products.find((p) => p.title === title);
+  Object.keys(cart).forEach((key) => {
+    const item = cart[key];
+    const product = getProducts().find((p) => p.id === Number(key));
+    if (!product) {
+      console.warn(`Produto "${key}" não encontrado! Removendo do carrinho...`);
+      delete cart[key];
+      return;
+    }
     const elements = createProductElements(product);
     elements.img.classList.add('cart-product-img');
     const unitItem = createElement('div', 'unit-item');
-    unitItem.dataset.productTitle = title;
+    unitItem.dataset.productTitle = key;
     const price = (item.price * item.quantity).toFixed(2);
     unitItem.append(
       elements.img,
@@ -33,7 +36,6 @@ export function loadCart() {
 
 export function totalPrice() {
   const cart = JSON.parse(localStorage.getItem('carts')) || {};
-
   const total = Object.values(cart).reduce((acc, value) => {
     const totalValue = value.price * value.quantity;
     return (acc += totalValue);
@@ -63,8 +65,8 @@ export function totalPrice() {
 //function: add new products to cart
 export function addToCart(product) {
   const cart = JSON.parse(localStorage.getItem('carts')) || {};
-  cart[product.title] = {
-    quantity: cart[product.title] ? cart[product.title].quantity + 1 : 1,
+  cart[product.id] = {
+    quantity: cart[product.id] ? cart[product.id].quantity + 1 : 1,
     price: product.price,
   };
   localStorage.setItem('carts', JSON.stringify(cart));
@@ -78,16 +80,16 @@ export function cartAction(event) {
   const target = event.target;
 
   const unitItem = target.closest('.unit-item');
-  const productTitle = unitItem.querySelector('h3').textContent;
+  const productId = unitItem.dataset.productTitle;
 
   if (target.classList.contains('less-btn')) {
-    if (cart[productTitle].quantity > 1) {
-      cart[productTitle].quantity--;
+    if (cart[productId].quantity > 1) {
+      cart[productId].quantity--;
     } else {
-      delete cart[productTitle];
+      delete cart[productId];
     }
   } else if (target.classList.contains('more-btn')) {
-    cart[productTitle].quantity++;
+    cart[productId].quantity++;
   }
 
   localStorage.setItem('carts', JSON.stringify(cart));
