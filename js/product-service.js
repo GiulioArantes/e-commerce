@@ -1,4 +1,6 @@
+import formatCurrency from '../js/main.js';
 import { createElement } from './dom-helpers.js';
+
 
 // function: basic product information gathered
 export function createProductElements(product) {
@@ -19,7 +21,7 @@ export function createProductElements(product) {
   const pPrice = createElement(
     'p',
     'price',
-    `De: R$ ${product.originalPrice} | Por: R$ ${product.price}`,
+    `De: ${formatCurrency(product.originalPrice)} | Por: ${formatCurrency(product.originalPrice * 0.9)}`,
     ''
   ); //prices
   return {
@@ -67,3 +69,23 @@ export function renderProduct(products) {
 export function showHundredProducts(products) {
   return products.filter((product) => product.price >= 100);
 }
+
+//Function: show mens products
+export function showMensProducts(products) {
+  return products.filter((product) => product.category === 'men\'s clothing');
+}
+
+export function showWomensProducts(products) {
+  return products.filter((product) => product.category === 'women\'s clothing');
+}
+
+export function showJeweleryProducts(products) {
+  return products.filter((product) => product.category === 'jewelery');
+}
+
+export function showEletronicsProducts(products) {
+  return products.filter((product) => product.category === 'electronics');
+}
+
+
+

@@ -1,3 +1,4 @@
+import formatCurrency from '../js/main.js';
 import { toggleElement } from './dom-helpers.js';
 
 let products = [];
@@ -31,7 +32,7 @@ export async function fetchProducts() {
   }
 }
 
-//Fuction: apply discount
+//Function: apply discount
 export function applyDiscount(products) {
   return products.map((product) => {
     const originalPrice = Number(product.price);
