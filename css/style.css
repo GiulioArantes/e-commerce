@@ -1,3 +1,17 @@
+/* css/style.css */
+@import url('base/_reset.css');
+@import url('base/_variables.css');
+@import url('layout/_grid.css');
+@import url('components/_card.css');
+@import url('components/_cart.css');
+@import url('components/_header.css');
+@import url('components/_modal.css');
+@import url('layout/_grid.css');
+@import url('layout/_sidebar.css');
+@import url('utils/_animations.css');
+@import url('utils/_helpers.css');
+/* ... */
+
 /* starts: header related */
 header {
   display: flex;
