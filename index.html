@@ -11,12 +11,15 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
     <title>Comércio eletrônico</title>
   </head>
 
   <body id="body">
-    <header>
+    <header class="top-container">
       <h1 id="main-title">Comércio Eletrônico</h1>
       <!-- starts: shopping cart and search input -->
       <div class="header-container">
@@ -61,7 +64,23 @@
       </button>
       <input type="checkbox" id="hundred" class="hidden" />
       <label for="hundred" id="hundred-label" class="hidden">+ R$ 100,00</label>
+          <button id="sidebar-category-btn">
+            <div id="sidebar-category-name-container"><h2>Categorias</h2></div>
+            <div id="sidebar-category-img">
+              <img src="assets/arrow-down.svg" id="arrow-down" alt="" />
+            </div>
+          </button>
+          <input type="checkbox" id="menscategory" class="hidden" />
+          <label for="menscategory" id="menscategory-label" class="hidden">Roupas Masculinas</label>
+          <input type="checkbox" id="womenscategory" class="hidden" />
+          <label for="womenscategory" id="womenscategory-label" class="hidden">Roupas Femininas</label>
+          <input type="checkbox" id="jewelerycategory" class="hidden" />
+          <label for="jewelerycategory" id="jewelerycategory-label" class="hidden">Jóias</label>
+          <input type="checkbox" id="eletronicscategory" class="hidden" />
+          <label for="eletronicscategory" id="eletronicscategory-label" class="hidden">Eletrônicos</label>
+
     </section>
+    
     <!-- starts: Product Description model -->
     <div id="modal" class="modal" data-modal-type="product">
       <div class="modal-content">

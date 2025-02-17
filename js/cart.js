@@ -2,6 +2,7 @@
 import { getProducts } from './api.js';
 import { createElement } from './dom-helpers.js';
 import { createProductElements } from './product-service.js';
+import formatCurrency from './main.js';
 
 const cartDisplay = document.querySelector('.cart-content');
 //function: load cart model
@@ -20,11 +21,11 @@ export function loadCart() {
     elements.img.classList.add('cart-product-img');
     const unitItem = createElement('div', 'unit-item');
     unitItem.dataset.productTitle = key;
-    const price = (item.price * item.quantity).toFixed(2);
+    const price = formatCurrency(item.price * item.quantity);
     unitItem.append(
       elements.img,
       elements.h3,
-      createElement('p', 'price', `Preço: R$ ${price}`),
+      createElement('p', 'price', `Preço: ${price}`),
       createElement('button', 'less-btn', '-'),
       createElement('p', 'quantity', `Qtd: ${item.quantity}`),
       createElement('button', 'more-btn', '+')
@@ -48,7 +49,7 @@ export function totalPrice() {
   const span = createElement(
     'span',
     'total-span',
-    `Total: R$ ${total.toFixed(2)}`
+    `Total: ${formatCurrency(total)}`
   );
   const totalPrice = createElement('p', 'total-value');
   totalPrice.appendChild(span);
@@ -60,6 +61,7 @@ export function totalPrice() {
   const divTotalPrice = createElement('div', 'div-total-prices');
   divTotalPrice.append(totalPrice, totalQuantity);
   cartDisplay.appendChild(divTotalPrice);
+
 }
 
 //function: add new products to cart
