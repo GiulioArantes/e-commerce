@@ -61,7 +61,6 @@ export function totalPrice() {
   const divTotalPrice = createElement('div', 'div-total-prices');
   divTotalPrice.append(totalPrice, totalQuantity);
   cartDisplay.appendChild(divTotalPrice);
-
 }
 
 //function: add new products to cart

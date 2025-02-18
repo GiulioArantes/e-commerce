@@ -1,4 +1,4 @@
-import formatCurrency from '../js/main.js';
+import formatCurrency from './js/main.js';
 import { toggleElement } from './dom-helpers.js';
 
 let products = [];

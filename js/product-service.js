@@ -1,7 +1,6 @@
 import formatCurrency from '../js/main.js';
 import { createElement } from './dom-helpers.js';
 
-
 // function: basic product information gathered
 export function createProductElements(product) {
   if (!product) {
@@ -80,12 +79,9 @@ export function showWomensProducts(products) {
 }
 
 export function showJeweleryProducts(products) {
-  return products.filter((product) => product.category === "jewelery");
+  return products.filter((product) => product.category === 'jewelery');
 }
 
 export function showEletronicsProducts(products) {
-  return products.filter((product) => product.category === "electronics");
+  return products.filter((product) => product.category === 'electronics');
 }
-
-
-
