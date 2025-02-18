@@ -1,7 +1,6 @@
 import formatCurrency from '../js/main.js';
 import { createElement } from './dom-helpers.js';
 
-
 // function: basic product information gathered
 export function createProductElements(product) {
   if (!product) {
@@ -72,11 +71,11 @@ export function showHundredProducts(products) {
 
 //Function: show mens products
 export function showMensProducts(products) {
-  return products.filter((product) => product.category === 'men\'s clothing');
+  return products.filter((product) => product.category === "men's clothing");
 }
 
 export function showWomensProducts(products) {
-  return products.filter((product) => product.category === 'women\'s clothing');
+  return products.filter((product) => product.category === "women's clothing");
 }
 
 export function showJeweleryProducts(products) {
@@ -86,6 +85,3 @@ export function showJeweleryProducts(products) {
 export function showEletronicsProducts(products) {
   return products.filter((product) => product.category === 'electronics');
 }
-
-
-

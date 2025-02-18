@@ -1,13 +1,20 @@
 fetch('https://fakestoreapi.com/products')
-  .then(res => res.json())
-  .then(json => console.log(json));
+  .then((res) => res.json())
+  .then((json) => console.log(json));
 import {
   getProducts,
   fetchProducts,
   applyDiscount,
   setProducts,
 } from './api.js';
-import { renderProduct, showHundredProducts, showMensProducts, showWomensProducts, showJeweleryProducts, showEletronicsProducts } from './product-service.js';
+import {
+  renderProduct,
+  showHundredProducts,
+  showMensProducts,
+  showWomensProducts,
+  showJeweleryProducts,
+  showEletronicsProducts,
+} from './product-service.js';
 import { searchProduct } from './search-service.js';
 import { addToCart, loadCart, cartAction } from './cart.js';
 import { modalActions, openProductModal } from './modal-service.js';
@@ -62,7 +69,9 @@ const womenscategoryLabel = document.querySelector('#womenscategory-label');
 const inputJeweleryCategory = document.querySelector('#jewelerycategory');
 const jewelerycategoryLabel = document.querySelector('#jewelerycategory-label');
 const inputEletronicsCategory = document.querySelector('#eletronicscategory');
-const eletronicscategoryLabel = document.querySelector('#eletronicscategory-label');
+const eletronicscategoryLabel = document.querySelector(
+  '#eletronicscategory-label'
+);
 
 inputHundred.addEventListener('change', () => {
   if (inputHundred.checked) {
@@ -195,7 +204,6 @@ body.addEventListener('click', (event) => {
     modalActions.open('cart');
   }
 });
-
 
 // format price to BRL
 

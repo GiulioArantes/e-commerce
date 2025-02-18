@@ -18,7 +18,7 @@ declare -A EMOJI_MAP=(
 
 # Escopos permitidos para branch e commit
 VALID_BRANCH_SCOPES=("js/script" "js/cart" "css" "assets" "docs" "fix" "refactor" "Project" "repository")
-VALID_COMMIT_SCOPES=("docs" "script" "cart" "css" "config" "repositor" "accessibility" "Project")
+VALID_COMMIT_SCOPES=("docs" "script" "cart" "css" "config" "repositor" "accessibility" "Project" "eslint")
 
 DEFAULT_PR_BASE="main"        # Branch base para PRs
 AUTO_FORMAT=true              # Executa Prettier antes de commits
@@ -110,6 +110,8 @@ format_code() {
     if [ "$AUTO_FORMAT" = true ]; then
         echo "→ Formatando código com Prettier..."
         npx prettier --write "css/*.css" "js/*.js" --ignore-path .prettierignore
+        echo "→ Verificando código com ESLint..."
+        npx eslint . ---fix
     fi
 }
 
