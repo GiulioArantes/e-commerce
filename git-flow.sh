@@ -111,7 +111,7 @@ format_code() {
         echo "→ Formatando código com Prettier..."
         npx prettier --write "css/*.css" "js/*.js" --ignore-path .prettierignore
         echo "→ Verificando código com ESLint..."
-        npx eslint . ---fix
+        npx eslint . --fix
     fi
 }
 
