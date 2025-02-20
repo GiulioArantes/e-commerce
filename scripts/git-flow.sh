@@ -18,7 +18,7 @@ declare -A EMOJI_MAP=(
 
 # Escopos permitidos para branch e commit
 VALID_BRANCH_SCOPES=("js/script" "js/cart" "css" "assets" "docs" "fix" "refactor" "Project" "repository")
-VALID_COMMIT_SCOPES=("docs" "script" "cart" "css" "config" "repository" "accessibility" "Project" "eslint")
+VALID_COMMIT_SCOPES=("docs" "script" "cart" "css" "config" "repository" "accessibility" "Project" "eslint" "readme")
 
 DEFAULT_PR_BASE="main"        # Branch base para PRs
 AUTO_FORMAT=true              # Executa Prettier antes de commits
