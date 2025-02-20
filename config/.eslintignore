@@ -1,0 +1,34 @@
+# Dependências
+node_modules/
+
+# Build e distribuição
+/build
+/dist
+
+# Cache
+.cache/
+
+# Arquivos de ambiente
+.env*
+*.local
+
+# Logs
+*.log
+
+# Arquivos gerados ou temporários
+*.tmp
+*.temp
+
+# Arquivos minificados
+*.min.js
+*.min.css
+
+# IDE/editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Outros
+.github/
+coverage/

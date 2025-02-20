@@ -1,0 +1,37 @@
+# Build e distribuição
+/build
+/dist
+
+# Dependências
+node_modules/
+
+# Cache
+.cache/
+
+# Arquivos de ambiente
+.env*
+
+# Arquivos de configuração
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+
+# IDE/editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos minificados
+*.min.js
+*.min.css
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Outros
+.github/
+coverage/

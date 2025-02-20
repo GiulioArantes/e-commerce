@@ -1,27 +1,27 @@
-import formatCurrency from '../js/main.js';
-import { createElement } from './dom-helpers.js';
+import formatCurrency from "../js/main.js";
+import { createElement } from "./dom-helpers.js";
 
 // function: basic product information gathered
 export function createProductElements(product) {
   if (!product) {
-    console.error('Produto é indefined!');
+    console.error("Produto é indefined!");
     return null;
   }
-  const img = createElement('img', 'product-img', '', {
+  const img = createElement("img", "product-img", "", {
     src: product.image,
     alt: product.title,
   });
-  const figure = document.createElement('figure');
+  const figure = document.createElement("figure");
   figure.appendChild(img); // images
-  const h3 = createElement('h3', '', product.title, {
+  const h3 = createElement("h3", "", product.title, {
     title: product.title,
   }); // titles
-  const pCategory = createElement('p', 'category', product.category); //categories
+  const pCategory = createElement("p", "category", product.category); //categories
   const pPrice = createElement(
-    'p',
-    'price',
+    "p",
+    "price",
     `De: ${formatCurrency(product.originalPrice)} | Por: ${formatCurrency(product.originalPrice * 0.9)}`,
-    ''
+    "",
   ); //prices
   return {
     figure,
@@ -34,31 +34,31 @@ export function createProductElements(product) {
 
 // Function: main product arrangement
 export function renderProduct(products) {
-  const displayProducts = document.getElementById('display-products');
-  displayProducts.innerHTML = '';
+  const displayProducts = document.getElementById("display-products");
+  displayProducts.innerHTML = "";
 
   products.forEach((product) => {
     const elements = createProductElements(product);
 
-    const openModalBtn = createElement('button', 'btn-product', 'Detalhes', ''); //Detalhes
+    const openModalBtn = createElement("button", "btn-product", "Detalhes", ""); //Detalhes
 
-    const divCart = createElement('div', 'div-cart', '', { id: product.id });
-    const imgCart = createElement('img', 'img-cart', '', {
-      src: 'assets/cart.svg',
-      alt: 'Adicionar ao carrinho',
+    const divCart = createElement("div", "div-cart", "", { id: product.id });
+    const imgCart = createElement("img", "img-cart", "", {
+      src: "assets/cart.svg",
+      alt: "Adicionar ao carrinho",
     }); //Carrinho
     divCart.appendChild(imgCart);
 
-    const cardBtns = createElement('div', 'card-btns', '', '');
+    const cardBtns = createElement("div", "card-btns", "", "");
     cardBtns.append(divCart, openModalBtn); // Agrupamento de elementos para estilização
 
-    const card = createElement('article', 'card', '', { id: product.id });
+    const card = createElement("article", "card", "", { id: product.id });
     card.append(
       elements.figure,
       elements.h3,
       elements.pCategory,
       elements.pPrice,
-      cardBtns
+      cardBtns,
     );
     displayProducts.appendChild(card); // Agrupamento de todos os elementos
   });
@@ -79,9 +79,9 @@ export function showWomensProducts(products) {
 }
 
 export function showJeweleryProducts(products) {
-  return products.filter((product) => product.category === 'jewelery');
+  return products.filter((product) => product.category === "jewelery");
 }
 
 export function showEletronicsProducts(products) {
-  return products.filter((product) => product.category === 'electronics');
+  return products.filter((product) => product.category === "electronics");
 }

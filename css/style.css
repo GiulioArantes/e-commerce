@@ -17,7 +17,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', serif;
+  font-family: "Poppins", serif;
 }
 
 /* starts: header related */
@@ -271,12 +271,12 @@ footer {
   z-index: 1000;
 }
 
-.modal[data-modal-type='cart'] .modal-content {
+.modal[data-modal-type="cart"] .modal-content {
   right: 0;
   width: 300px;
 }
 
-.modal[data-modal-type='buy'] .modal-content {
+.modal[data-modal-type="buy"] .modal-content {
   width: 400px;
 }
 
