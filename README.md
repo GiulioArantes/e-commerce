@@ -1,10 +1,10 @@
 # Fictional E-commerce | 100 Days of Code Challenge 🚀
 
-## 📖 About the Project
-
 This is a fictitious e-commerce project created as part of the **#100DaysOfCode** challenge, focusing on learning and evolving front-end development skills. The goal is to develop a modern and functional website, close to the standard of a professional e-commerce platform, using technologies such as HTML, CSS, JavaScript, and eventually React. The project also serves as a portfolio to showcase my web development skills.
 
 The system consumes dynamic data from the [Fake Store API](https://fakestoreapi.com/?spm=5aebb161.2ef5001f.0.0.14b0c921nnPvyQ) to simulate products, allowing the display of items with prices, descriptions, and categories. Additionally, it implements features such as a simulated shopping cart, filters by category and price, and responsiveness for different devices.
+
+![ecommerce home](https://i.postimg.cc/GpNWvtrS/ecommerce-home.png)
 
 ## 🛠️ Technologies Used
 
@@ -55,6 +55,8 @@ The project already includes the following features:
 
 2. **Simulated Shopping Cart:**
 
+![cart pic](https://i.postimg.cc/Mp3N8HcK/ecommerce-cart.png)
+
 - Implemented with `localStorage` to store selected products.
 - Features to add/remove products and adjust quantities.
 
@@ -63,6 +65,8 @@ The project already includes the following features:
 - Allows searching for products by name or category.
 
 4. **Filters:**
+
+![Ecommerce filter](https://i.postimg.cc/x8Ppp1DQ/ecommerce-filter.png)
 
 - Filtering by category (e.g., men's clothing, women's clothing, jewelry, electronics).
 - Filtering by price (e.g., products above $100).
