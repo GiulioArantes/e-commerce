@@ -6,8 +6,6 @@ This is a fictitious e-commerce project created as part of the **#100DaysOfCode*
 
 The system consumes dynamic data from the [Fake Store API](https://fakestoreapi.com/?spm=5aebb161.2ef5001f.0.0.14b0c921nnPvyQ) to simulate products, allowing the display of items with prices, descriptions, and categories. Additionally, it implements features such as a simulated shopping cart, filters by category and price, and responsiveness for different devices.
 
----
-
 ## 🛠️ Technologies Used
 
 So far, the technologies and tools used in the project are:
@@ -22,8 +20,6 @@ As I progress in the challenge, new technologies and libraries/frameworks will b
 
 - **React**: For a more robust and modular architecture.
 - **Automation tools**: Webpack or Vite for optimization and build processes.
-
----
 
 ## 📈 Challenge Progress
 
@@ -47,8 +43,6 @@ As I progress in the challenge, new technologies and libraries/frameworks will b
 - [ ] Integrate with a simulated payment API.
 - [ ] User authentication (simulated with `localStorage`).
 - [ ] Refactor the code to use React and modular components.
-
----
 
 ## ✨ Current Features
 
@@ -81,8 +75,6 @@ The project already includes the following features:
 
 - Layout adapts to tablets and mobile devices.
 
----
-
 ## 🔧 How to Run the Project
 
 1. Clone this repository:
@@ -91,8 +83,6 @@ The project already includes the following features:
    ```
 2. Open the `index.html` file in your browser to view the project.
    > **Note**: This project does not require additional configuration, as it uses only native HTML, CSS, and JavaScript.
-
----
 
 ## ✨ Planned Features
 
@@ -109,28 +99,23 @@ The following features are planned to be implemented in the future:
 - **Refactoring to React:**
   - Restructuring the code to use React components and state management.
 
----
-
 ## 🤝 Contribution
 
 Contributions are welcome! Follow the steps below to collaborate:
-
+```bash
 1. Fork this repository.
-2. Create a branch with your changes:
-   ```bash
-   git checkout -b my-feature
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Added a new feature"
-   ```
-4. Push your changes:
-   ```bash
-   git push origin my-feature
-   ```
-5. Open a pull request.
 
----
+2. Create a branch with your changes:
+   git checkout -b my-feature
+
+3. Commit your changes:
+   git commit -m "Added a new feature"
+
+4. Push your changes:
+   git push origin my-feature
+
+5. Open a pull request.
+```
 
 ## 👥 Contributors
 
@@ -140,21 +125,14 @@ I would like to thank the contributors who helped improve this project:
 
 If you'd like to contribute, feel free to open an issue or submit a pull request!
 
----
+> 🐛 Reporting Bugs or Suggesting Improvements: </br>
+> If you find any bugs or have suggestions to improve the project, open an issue on GitHub.
 
-## 🐛 Reporting Bugs or Suggesting Improvements
-
-If you find any bugs or have suggestions to improve the project, open an issue on GitHub.
-
----
-
-## 📄 License
+### 📄 License
 
 This project is under the MIT license. See the [LICENSE](./LICENSE) file for more details.
 
----
-
-## 📱 Live Demo
+### 📱 Live Demo
 
 You can access the project online via GitHub Pages:
 [GitHub Pages](https://giulioarantes.github.io/e-commerce/)
